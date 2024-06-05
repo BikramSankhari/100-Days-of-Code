@@ -1,0 +1,43 @@
+{% extends 'bootstrap/base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block styles %}
+{{ super() }}
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,700">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,700">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+{% endblock %}
+
+{% block title %}Edit Movies{% endblock %}
+
+{% block content %}
+<div class="content">
+    <h1 class="heading">Movie Title</h1>
+    <p class="description">Edit Movie Rating</p>
+</div>
+<main class="form-signin w-100 m-auto" style="max-width: 330px;padding: 1rem; margin: auto!important;">
+    <form method="post" action="{{url_for('update',id=id)}}" novalidate>
+        {{ form.csrf_token }}
+        <div class="form-floating">
+            {{form.rating.label(for="floatingInput")}}
+            {{form.rating(type="email", class="form-control", id="floatingInput")}}
+        </div>
+        <ul>
+            {% for error in form.rating.errors %}
+            <li>{{error}}</li>
+            {% endfor %}
+        </ul>
+
+        <div class="form-floating">
+            {{form.review.label(for="floatingInput")}}
+            {{form.review(type="email", class="form-control", id="floatingInput")}}
+        </div>
+        <ul>
+            {% for error in form.review.errors %}
+            <li>{{error}}</li>
+            {% endfor %}
+        </ul>
+        {{form.update(class="btn btn-primary w-100 py-2 mt-3", type="submit")}}
+    </form>
+</main>
+{% endblock %}

@@ -1,0 +1,5 @@
+Flask
+gunicorn
+Werkzeug
+PyPDF2
+gTTS

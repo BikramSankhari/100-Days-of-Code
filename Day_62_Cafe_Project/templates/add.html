@@ -1,0 +1,67 @@
+{% extends "template.html" %}
+
+{% block title %}Add a Cafe With Wi-Fi{% endblock %}
+
+{% block body %}
+<h1>Add a New Cafe to the DataBase</h1>
+<br>
+<form method="post" novalidate>
+    {{form.csrf_token}}
+    <div class="mb-3">
+        {{form.name.label(for="exampleFormControlInput1", class="form-label")}}
+        {{form.name(class="form-control", id="exampleFormControlInput1")}}
+        <ul>
+            {% for error in form.name.errors %}
+                <li>{{error}}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="mb-3">
+        {{form.location.label(for="exampleFormControlInput1", class="form-label")}}
+        {{form.location(class="form-control", id="exampleFormControlInput1")}}
+        <ul>
+            {% for error in form.location.errors %}
+            <li>{{error}}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="mb-3">
+        {{form.o_time.label(for="exampleFormControlInput1", class="form-label")}}
+        {{form.o_time(class="form-control", id="exampleFormControlInput1")}}
+        <ul>
+            {% for error in form.o_time.errors %}
+            <li>{{error}}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="mb-3">
+        {{form.c_time.label(for="exampleFormControlInput1", class="form-label")}}
+        {{form.c_time(class="form-control", id="exampleFormControlInput1")}}
+        <ul>
+            {% for error in form.c_time.errors %}
+            <li>{{error}}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="mb-3">
+        {{form.coffee_rating.label(for="exampleFormControlInput1", class="form-label")}}
+        {{form.coffee_rating(class="form-control", id="exampleFormControlInput1")}}
+    </div>
+    <div class="mb-3">
+        {{form.wifi_rating.label(for="exampleFormControlInput1", class="form-label")}}
+        {{form.wifi_rating(class="form-control", id="exampleFormControlInput1")}}
+    </div>
+    <div class="mb-3">
+        {{form.power_rating.label(for="exampleFormControlInput1", class="form-label")}}
+        {{form.power_rating(class="form-control", id="exampleFormControlInput1")}}
+    </div>
+    <div class="col-auto">
+        {{form.submit(type="submit", class="btn btn-primary mb-3")}}
+    </div>
+</form>
+<br>
+<a href="{{url_for('cafes')}}"><h5>See All Cafes >></h5></a>
+<br>
+<a href="{{url_for('home')}}"><h5><< Go Home</h5></a>
+
+{% endblock %}

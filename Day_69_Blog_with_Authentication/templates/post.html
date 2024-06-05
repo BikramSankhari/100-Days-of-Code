@@ -1,0 +1,70 @@
+{% extends 'bootstrap/base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block content %}
+{% include "header.html" %}
+
+<!-- Page Header -->
+<header class="masthead" style="background-image: url('{{post[0].img_url}}')">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <div class="post-heading">
+                    <h1>{{post[0].title}}</h1>
+                    <h2 class="subheading">{{post[0].subtitle}}</h2>
+                    <span class="meta">Posted by
+              <a href="#">{{post[1]}}</a>
+              on {{post[0].date}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                {{ post[0].body|safe }}
+                <hr>
+                {% if current_user.id == 1 %}
+                <div class="clearfix">
+                    <a class="btn btn-primary float-right" href="{{url_for('edit_post', post_id=post[0].id)}}">Edit
+                        Post</a>
+                </div>
+                {% endif %}
+
+
+                <!--           Comments Area -->
+                {% if current_user.is_active %}
+                {{ ckeditor.load() }}
+                {{ ckeditor.config(name='body') }}
+                {{ wtf.quick_form(form, novalidate=True, button_map={"submit": "primary"}) }}
+                {% endif %}
+                <div class="col-lg-8 col-md-10 mx-auto comment">
+                    <ul class="commentList">
+                        {% for comment in comments %}
+                        <li>
+                            <div class="commenterImage">
+                                <img src="{{ comment[2] | gravatar }}"/>
+                            </div>
+                            <div class="commentText">
+                                <p>{{comment[0]}}</p>
+                                <span class="date sub-text">{{comment[1]}}</span>
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</article>
+
+<hr>
+{% include "footer.html" %}
+{% endblock %}

@@ -1,0 +1,9 @@
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(to right, #57C5EF, #50E753);
+  color: #0B670D;
+  padding: 2vw;
+}

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="box">
+    <h1>Login</h1>
+
+    <form action="{{ url_for('login') }}" method="post">
+        <input type="text" name="email" placeholder="Email" required="required"/>
+        {% if from_post and not user_found %}
+        <ul>
+            <li>Please Enter a Valid User Email</li>
+        </ul>
+        {% endif %}
+        <input type="password" name="password" placeholder="Password" required="required"/>
+        {% if from_post and password_mismatch %}
+        <ul>
+            <li>Incorrect Password</li>
+        </ul>
+        {% endif %}
+        <button type="submit" class="btn btn-primary btn-block btn-large">Let me in.</button>
+    </form>
+</div>
+
+{% endblock %}

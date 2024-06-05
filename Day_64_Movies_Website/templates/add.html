@@ -1,0 +1,32 @@
+{% extends 'bootstrap/base.html' %}
+
+{% block styles %}
+{{ super() }}
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,700">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,700">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+{% endblock %}
+
+{% block title %}Add Movie{% endblock %}
+
+{% block content %}
+<div class="content">
+    <h1 class="heading">Add a Movie</h1>
+</div>
+<main class="form-signin w-100 m-auto" style="max-width: 330px;padding: 1rem; margin: auto!important;">
+    <form method="post" action="{{url_for('add')}}" novalidate>
+        {{ form.csrf_token }}
+
+        <div class="form-floating">
+            {{form.query.label(for="floatingInput")}}
+            {{form.query(type="email", class="form-control", id="floatingInput")}}
+        </div>
+        <ul>
+            {% for error in form.query.errors %}
+            <li>{{error}}</li>
+            {% endfor %}
+        </ul>
+        {{form.search(class="btn btn-primary w-100 py-2 mt-3", type="submit")}}
+    </form>
+</main>
+{% endblock %}
